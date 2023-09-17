@@ -8,7 +8,6 @@ from paddles import Paddle
 from ball import Ball
 from timer import Timer
 import time
-import turtle
 
 #####################
 
