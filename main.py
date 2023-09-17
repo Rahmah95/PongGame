@@ -12,7 +12,7 @@ import turtle
 
 #####################
 
-# create objects from classes
+# create objects and instances from classes
 screen = Screen()
 screen_split = Turtle()
 winner_screen = Turtle()
@@ -131,9 +131,6 @@ def game_loop():
             if score_P1.score == score_P2.score:
                 winner_screen_setup("Draw")
                 game_on = False
-
-
-
 
 
 #################

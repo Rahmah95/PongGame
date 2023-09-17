@@ -1,5 +1,4 @@
 from turtle import Turtle
-import time
 
 
 class Timer(Turtle):
