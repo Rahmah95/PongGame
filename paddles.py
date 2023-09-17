@@ -32,3 +32,7 @@ class Paddle(Turtle):
         new_y = self.paddle.ycor() - 20
         if new_y > -260:  # to keep paddle on screen
             self.paddle.goto(self.paddle.xcor(), new_y)
+
+    def paddle_current_position(self):
+        """Return current position of paddle"""
+        return self.paddle.pos()

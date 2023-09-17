@@ -71,22 +71,22 @@ def conditions_tracking():
         ball.bounce_y()
     ##################################
     # detect ball collision with player1/right paddle
-    if ball.distance(paddle_P1) < 50 and ball.xcor() > 320:
+    if ball.distance(paddle_P1.paddle_current_position()) < 50 and ball.xcor() >= 340:
         ball.bounce_x()
         print("made contact")
 
     # detect ball collision with player2/left paddle
-    if ball.distance(paddle_P2) < 50 and ball.xcor() < -320:
+    if ball.distance(paddle_P2.paddle_current_position()) < 50 and ball.xcor() <= -340:
         ball.bounce_x()
         print("made contact")
     ##################################
     # detect if player 1/right paddle misses the ball
-    if ball.xcor() >= 400:
+    if ball.xcor() > 400:
         score_P2.increase_score()
         ball.reset_position()
 
     # detect if player 2/left paddle misses the ball
-    if ball.xcor() <= -400:
+    if ball.xcor() < -400:
         score_P1.increase_score()
         ball.reset_position()
 
