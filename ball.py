@@ -1,4 +1,4 @@
-# Pong - ball - Ball class
+# Pong - Ball class
 
 from turtle import Turtle
 

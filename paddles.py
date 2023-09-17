@@ -1,4 +1,4 @@
-# Pong - paddles - Paddle class
+# Pong - Paddle class
 
 from turtle import Turtle
 

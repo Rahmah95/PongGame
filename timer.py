@@ -1,3 +1,4 @@
+# Pong - timer class
 from turtle import Turtle
 
 

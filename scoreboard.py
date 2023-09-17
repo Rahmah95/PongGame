@@ -1,3 +1,4 @@
+# Pong - ScoreBoard class
 from turtle import Turtle
 
 
