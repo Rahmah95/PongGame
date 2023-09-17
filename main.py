@@ -76,7 +76,10 @@ def winner_screen_setup(winner):
     winner_screen.penup()
     winner_screen.goto(0, 0)
     winner_screen.color("white")
-    winner_screen.write(f"Winner is {winner}", align="center", font=("Arial", 24, "normal"))
+    if winner != "Draw":
+        winner_screen.write(f"Winner is {winner}", align="center", font=("Arial", 24, "normal"))
+    else:
+        winner_screen.write(f"{winner}", align="center", font=("Arial", 24, "normal"))
 
 
 def conditions_tracking():
@@ -128,6 +131,9 @@ def game_loop():
             if score_P1.score == score_P2.score:
                 winner_screen_setup("Draw")
                 game_on = False
+
+
+
 
 
 #################

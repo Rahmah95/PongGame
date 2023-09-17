@@ -16,7 +16,6 @@ class Timer(Turtle):
 
     def countdown(self):
         """Countdown timer"""
-        # while self.time_count_down:
         if self.time_count_down > 0:
             mins, secs = divmod(self.time_count_down, 60)
             timer = '{:02d}:{:02d}'.format(mins, secs)
