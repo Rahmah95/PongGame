@@ -6,18 +6,22 @@ from turtle import Screen, Turtle
 from scoreboard import ScoreBoard
 from paddles import Paddle
 from ball import Ball
+from timer import Timer
 import time
+import turtle
 
 #####################
 
 # create objects from classes
 screen = Screen()
 screen_split = Turtle()
+winner_screen = Turtle()
 score_P1 = ScoreBoard()
 score_P2 = ScoreBoard()
 paddle_P1 = Paddle()
 paddle_P2 = Paddle()
 ball = Ball()
+timer = Timer()
 
 
 ####################
@@ -46,10 +50,11 @@ def split_screen():
 
 def objects_layout_setup():
     """Setup objects position on screen"""
-    paddle_P1.paddle_position(360, 0)
-    paddle_P2.paddle_position(-360, 0)
+    paddle_P1.paddle_position(370, 0)
+    paddle_P2.paddle_position(-370, 0)
     score_P1.score_position_player1()
     score_P2.score_position_player2()
+    timer.timer_position()
 
 
 def event_listener_for_player1():
@@ -64,6 +69,16 @@ def event_listener_for_player2():
     screen.onkeypress(paddle_P2.paddle_move_down, "s")
 
 
+def winner_screen_setup(winner):
+    """Setup winner screen"""
+    screen.reset()
+    winner_screen.hideturtle()
+    winner_screen.penup()
+    winner_screen.goto(0, 0)
+    winner_screen.color("white")
+    winner_screen.write(f"Winner is {winner}", align="center", font=("Arial", 24, "normal"))
+
+
 def conditions_tracking():
     """Score and game conditions tracking"""
     # detect ball collision with wall
@@ -71,22 +86,20 @@ def conditions_tracking():
         ball.bounce_y()
     ##################################
     # detect ball collision with player1/right paddle
-    if ball.distance(paddle_P1.paddle_current_position()) < 50 and ball.xcor() >= 340:
+    if ball.distance(paddle_P1.paddle_current_position()) < 50 and ball.xcor() > 340:
         ball.bounce_x()
-        print("made contact")
 
     # detect ball collision with player2/left paddle
-    if ball.distance(paddle_P2.paddle_current_position()) < 50 and ball.xcor() <= -340:
+    if ball.distance(paddle_P2.paddle_current_position()) < 50 and ball.xcor() < -340:
         ball.bounce_x()
-        print("made contact")
     ##################################
     # detect if player 1/right paddle misses the ball
-    if ball.xcor() > 400:
+    if ball.xcor() >= 399:
         score_P2.increase_score()
         ball.reset_position()
 
     # detect if player 2/left paddle misses the ball
-    if ball.xcor() < -400:
+    if ball.xcor() <= -399:
         score_P1.increase_score()
         ball.reset_position()
 
@@ -99,9 +112,22 @@ def game_loop():
     game_on = True
     while game_on:
         time.sleep(0.1)  # to slow ball movement
-        screen.update()
-        ball.move()
-        conditions_tracking()
+        timer.clear()  # to track time update without duplication
+        if timer.countdown():
+            timer.update_timer()
+            screen.update()
+            ball.move()
+            conditions_tracking()
+        if timer.countdown() == "00:00":
+            if score_P1.score > score_P2.score:
+                winner_screen_setup("Player 1")
+                game_on = False
+            if score_P1.score < score_P2.score:
+                winner_screen_setup("Player 2")
+                game_on = False
+            if score_P1.score == score_P2.score:
+                winner_screen_setup("Draw")
+                game_on = False
 
 
 #################
