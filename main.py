@@ -134,9 +134,11 @@ def game_loop():
 
 #################
 
-# Execute program
-screen_setup()
-split_screen()
-objects_layout_setup()
-game_loop()
-screen.exitonclick()
+if __name__ == "__main__":
+    screen_setup()
+    split_screen()
+    objects_layout_setup()
+    game_loop()
+    screen.exitonclick()
+
+
